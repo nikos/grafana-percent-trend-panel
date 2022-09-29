@@ -25,17 +25,17 @@
       },
       {
         "name": "License",
-        "url": "https://github.com/nikos/grafana-percent-trend-panel/blob/master/LICENSE"
+        "url": "https://github.com/nikos/grafana-percent-trend-panel/blob/main/LICENSE"
       }
     ],
     "screenshots": [
       {
         "name": "Options",
-        "path": "https://raw.githubusercontent.com/nikos/grafana-percent-trend-panel/master/docs/options.png"
+        "path": "https://raw.githubusercontent.com/nikos/grafana-percent-trend-panel/main/docs/options.png"
       }
     ],
     "version": "1.0.0",
-    "updated": "2022-09-28"
+    "updated": "2022-09-29"
   },
   "dependencies": {
     "grafanaDependency": ">=7.0.0",

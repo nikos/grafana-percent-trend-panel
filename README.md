@@ -4,7 +4,7 @@
 
 A panel for Grafana 7.0+ which computes and displays percent with trend compared to a previous value.
 
-![Sample panel](https://raw.githubusercontent.com/nikos/grafana-percent-trend-panel/master/docs/panel-demo.png)
+![Sample panel](https://raw.githubusercontent.com/nikos/grafana-percent-trend-panel/main/docs/panel-demo.png)
 
 Configuration allows to display the percentage value compared to the base value plain or 
 interpret the percentage change as difference ("trend") with a colored (green/red) triangle symbol
@@ -14,7 +14,7 @@ The idea for this plugin panel was inspired by an article about [Embedded Analyt
 
 ## Install
 
-Download the [latest release](https://github.com/nikos/grafana-percent-trend-panel/releases/download/v1.0.0/grafana-percent-trend-panel.zip) and unzip it in your grafana plugin folder.
+Download the [latest release](https://github.com/nikos/grafana-percent-trend-panel/releases/download/v1.0.0/nikosc-percenttrend-panel-1.0.0.zip) and unzip it in your grafana plugin folder.
 
 
 ## Usage
@@ -23,7 +23,7 @@ Download the [latest release](https://github.com/nikos/grafana-percent-trend-pan
 
 2. Select the field names of the query results and use them to display your percentage trend
 
-   ![Configure details in panel options](https://raw.githubusercontent.com/nikos/grafana-percent-trend-panel/master/docs/panel-options.png)
+   ![Configure details in panel options](https://raw.githubusercontent.com/nikos/grafana-percent-trend-panel/main/docs/panel-options.png)
 
 
 ## Develop and contribute
