@@ -34,8 +34,8 @@
         "path": "https://raw.githubusercontent.com/nikos/grafana-percent-trend-panel/main/docs/options.png"
       }
     ],
-    "version": "1.0.0",
-    "updated": "2022-09-29"
+    "version": "1.0.1",
+    "updated": "2022-09-30"
   },
   "dependencies": {
     "grafanaDependency": ">=7.0.0",
