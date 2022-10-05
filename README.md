@@ -14,7 +14,7 @@ The idea for this plugin panel was inspired by an article about [Embedded Analyt
 
 ## Install
 
-Download the [latest release](https://github.com/nikos/grafana-percent-trend-panel/releases/download/v1.0.1/nikosc-percenttrend-panel-1.0.1.zip) and unzip it in your grafana plugin folder.
+Download the [latest release](https://github.com/nikos/grafana-percent-trend-panel/releases/download/v1.0.3/nikosc-percenttrend-panel-1.0.3.zip) and unzip it in your grafana plugin folder.
 
 ## Usage
 

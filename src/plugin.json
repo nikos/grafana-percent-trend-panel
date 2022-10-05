@@ -9,12 +9,7 @@
       "name": "Niko Schmuck",
       "url": "https://nava.de"
     },
-    "keywords": [
-      "percent",
-      "trend",
-      "stat",
-      "stats"
-    ],
+    "keywords": ["percent", "trend", "stat", "stats"],
     "logos": {
       "small": "img/logo.svg",
       "large": "img/logo.svg"
@@ -39,11 +34,11 @@
         "path": "img/screenshots/panel-options.png"
       }
     ],
-    "version": "1.0.2",
+    "version": "1.0.3",
     "updated": "2022-10-04"
   },
   "dependencies": {
-    "grafanaDependency": ">=7.0.0",
+    "grafanaDependency": ">=8.1.0",
     "plugins": []
   }
 }

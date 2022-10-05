@@ -2,7 +2,7 @@ import { PanelPlugin } from '@grafana/data';
 import { PercentPanelOptions } from './types';
 import { PercentPanel } from './PercentPanel';
 
-export const plugin = new PanelPlugin<PercentPanelOptions>(PercentPanel).setPanelOptions(builder => {
+export const plugin = new PanelPlugin<PercentPanelOptions>(PercentPanel).setPanelOptions((builder) => {
   return builder
     .addFieldNamePicker({
       path: 'percentageValueField',
@@ -33,7 +33,7 @@ export const plugin = new PanelPlugin<PercentPanelOptions>(PercentPanel).setPane
       path: 'percentageNrDecimals',
       name: 'Nr. of decimals',
       description: 'Displayed for the percentage (-1: unlimited)',
-      defaultValue: 2
+      defaultValue: 2,
     })
     .addTextInput({
       path: 'percentageValueFontSize',
