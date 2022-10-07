@@ -18,3 +18,8 @@ Added logo.
 * Checked backward compatibility, set from 7.0.0 to 8.1.0
 * Improved check for existence of referred data frames (kudos to Esteban)
 
+## 1.0.4 (2022-10-07)
+
+* Turned screenshot images from README from relative to absolute URLs
+* Submission to Grafana Community 
+

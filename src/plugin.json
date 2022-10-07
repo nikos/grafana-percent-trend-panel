@@ -34,8 +34,8 @@
         "path": "img/screenshots/panel-options.png"
       }
     ],
-    "version": "1.0.3",
-    "updated": "2022-10-04"
+    "version": "1.0.4",
+    "updated": "2022-10-07"
   },
   "dependencies": {
     "grafanaDependency": ">=8.1.0",
