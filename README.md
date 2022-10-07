@@ -2,7 +2,8 @@
 
 [![Build](https://github.com/nikos/grafana-percent-trend-panel/workflows/CI/badge.svg)](https://github.com/nikos/grafana-percent-trend-panel/actions?query=workflow%3A%22CI%22)
 
-A panel for Grafana 7.0+ which computes and displays percent with trend compared to a previous value.
+A panel plugin for Grafana >= 8.1.0 which computes and displays percent with trend compared to a previous value in a 
+stat style big value manner.
 
 ![Sample panel](https://raw.githubusercontent.com/nikos/grafana-percent-trend-panel/main/src/img/screenshots/panel-demo.png)
 
