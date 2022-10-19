@@ -3,6 +3,7 @@ export interface PercentPanelOptions {
   baseValueField: string;
   unit: string;
   interpretAsTrend: boolean;
+  positiveIsGood?: boolean;
   percentageNrDecimals?: number;
   referenceText: string;
   percentageValueFontSize: string;

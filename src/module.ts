@@ -24,6 +24,11 @@ export const plugin = new PanelPlugin<PercentPanelOptions>(PercentPanel).setPane
       name: 'Use value difference as percentage',
       defaultValue: true,
     })
+    .addBooleanSwitch({
+      path: 'positiveIsGood',
+      name: 'Colorize positive trend in green',
+      defaultValue: true,
+    })
     .addTextInput({
       path: 'referenceText',
       name: 'Description of which values are compared',

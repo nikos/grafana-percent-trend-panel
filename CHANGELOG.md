@@ -23,3 +23,6 @@ Added logo.
 * Turned screenshot images from README from relative to absolute URLs
 * Submission to Grafana Community 
 
+## 1.0.5 (2022-10-19)
+
+* Allow to invert colorization of trend (thanks [@jammiemil](https://github.com/nikos/grafana-percent-trend-panel/issues/10))

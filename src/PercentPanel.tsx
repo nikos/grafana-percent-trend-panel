@@ -33,6 +33,14 @@ export const PercentPanel: React.FC<Props> = ({ options, data, width, height }) 
     ? options.percentageValueFontSize
     : (parseInt(options.percentageValueFontSize, 10) / 100) * BASE_FONT_SIZE + 'px';
 
+  const positiveTrendColor = (options.positiveIsGood === undefined ? true : options.positiveIsGood)
+    ? theme.visualization.getColorByName('green')
+    : theme.visualization.getColorByName('red');
+
+  const negativeTrendColor = (options.positiveIsGood === undefined ? true : options.positiveIsGood)
+    ? theme.visualization.getColorByName('red')
+    : theme.visualization.getColorByName('green');
+
   // Get values for calculating percentage
   const percentageValueSerie = data.series.find((serie) =>
     serie.fields.find((field) => field.name === options.percentageValueField)
@@ -89,7 +97,7 @@ export const PercentPanel: React.FC<Props> = ({ options, data, width, height }) 
           <SpanValue
             className="percenttrend-panel-percent"
             fontSize={options.baseValueFontSize}
-            color={theme.visualization.getColorByName('green')}
+            color={positiveTrendColor}
           >
             +{percentFormatted}% &#9650;
           </SpanValue>
@@ -97,10 +105,9 @@ export const PercentPanel: React.FC<Props> = ({ options, data, width, height }) 
           <SpanValue
             className="percenttrend-panel-percent"
             fontSize={options.baseValueFontSize}
-            color={theme.visualization.getColorByName('red')}
+            color={negativeTrendColor}
           >
-            {' '}
-            {percentFormatted}% &#9660;
+              {percentFormatted}% &#9660;
           </SpanValue>
         )}
         <SpanValue className="percenttrend-panel-ref" fontSize={options.referenceTextFontSize}>
