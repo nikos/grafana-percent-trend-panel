@@ -107,7 +107,7 @@ export const PercentPanel: React.FC<Props> = ({ options, data, width, height }) 
             fontSize={options.baseValueFontSize}
             color={negativeTrendColor}
           >
-              {percentFormatted}% &#9660;
+            {percentFormatted}% &#9660;
           </SpanValue>
         )}
         <SpanValue className="percenttrend-panel-ref" fontSize={options.referenceTextFontSize}>
