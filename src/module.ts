@@ -2,6 +2,7 @@ import { PanelPlugin } from '@grafana/data';
 import { PercentPanelOptions } from './types';
 import { PercentPanel } from './PercentPanel';
 
+// .useFieldConfig()
 export const plugin = new PanelPlugin<PercentPanelOptions>(PercentPanel).setPanelOptions((builder) => {
   return builder
     .addFieldNamePicker({
@@ -18,6 +19,12 @@ export const plugin = new PanelPlugin<PercentPanelOptions>(PercentPanel).setPane
       path: 'unit',
       name: 'Unit',
       defaultValue: '',
+    })
+    .addNumberInput({
+      path: 'percentageValueDecimals',
+      name: 'Nr. of decimals for percentage value',
+      description: 'For the percentage value number (-1: auto)',
+      defaultValue: -1,
     })
     .addBooleanSwitch({
       path: 'interpretAsTrend',
@@ -36,8 +43,8 @@ export const plugin = new PanelPlugin<PercentPanelOptions>(PercentPanel).setPane
     })
     .addNumberInput({
       path: 'percentageNrDecimals',
-      name: 'Nr. of decimals',
-      description: 'Displayed for the percentage (-1: unlimited)',
+      name: 'Nr. of decimals for percentage display',
+      description: 'Displayed for the percentage (-1: auto)',
       defaultValue: 2,
     })
     .addTextInput({
@@ -48,7 +55,7 @@ export const plugin = new PanelPlugin<PercentPanelOptions>(PercentPanel).setPane
     })
     .addTextInput({
       path: 'baseValueFontSize',
-      name: 'Font size for base value',
+      name: 'Font size for percent/change display',
       description: 'Either in percentage or pixel',
       defaultValue: '16px',
     })

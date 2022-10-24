@@ -25,13 +25,47 @@ function SpanValue({
   );
 }
 
-export const PercentPanel: React.FC<Props> = ({ options, data, width, height }) => {
-  const theme = useTheme2();
-  const styles = useStyles(getPanelStyles);
+interface TrendDisplay {
+  percent: number;
+  prefix: string;
+  suffix: string;
+  color?: string;
+  percentFormatted: string;
+  percentageValueFormatted: string;
+}
 
-  const percentageValueFontSize = options.percentageValueFontSize.includes('px')
-    ? options.percentageValueFontSize
-    : (parseInt(options.percentageValueFontSize, 10) / 100) * BASE_FONT_SIZE + 'px';
+function prepareTrendDisplay(
+  options: PercentPanelOptions,
+  baseValueSum: number,
+  percentageValueSum: number
+): TrendDisplay {
+  const percentageValueFormat = getValueFormat(options.unit)(
+    percentageValueSum,
+    options.percentageValueDecimals,
+    undefined,
+    undefined
+  );
+  const percentageValueFormatted = formattedValueToString(percentageValueFormat);
+  const suffix = options.interpretAsTrend ? (baseValueSum >= 0 ? ' \u25B2' : ' \u25BC') : '';
+  const prefix = baseValueSum > 0 ? '+' : '';
+
+  if (baseValueSum == 0.0) {
+    return {
+      percent: NaN,
+      prefix: '',
+      suffix: '',
+      percentFormatted: 'N/A',
+      percentageValueFormatted,
+    };
+  }
+
+  const percent = options.interpretAsTrend
+    ? ((percentageValueSum - baseValueSum) * 100) / baseValueSum
+    : (percentageValueSum * 100) / baseValueSum;
+  const percentFormatted =
+    options.percentageNrDecimals !== -1 ? percent.toFixed(options.percentageNrDecimals) : percent.toString();
+
+  const theme = useTheme2();
 
   const positiveTrendColor = (options.positiveIsGood === undefined ? true : options.positiveIsGood)
     ? theme.visualization.getColorByName('green')
@@ -40,6 +74,23 @@ export const PercentPanel: React.FC<Props> = ({ options, data, width, height }) 
   const negativeTrendColor = (options.positiveIsGood === undefined ? true : options.positiveIsGood)
     ? theme.visualization.getColorByName('red')
     : theme.visualization.getColorByName('green');
+
+  return {
+    percent,
+    prefix,
+    suffix,
+    color: percent == 0 ? undefined : (percent >= 0 ? positiveTrendColor : negativeTrendColor),
+    percentFormatted: percentFormatted + '%',
+    percentageValueFormatted,
+  };
+}
+
+export const PercentPanel: React.FC<Props> = ({ options, data, width, height }) => {
+  const styles = useStyles(getPanelStyles);
+
+  const percentageValueFontSize = options.percentageValueFontSize.includes('px')
+    ? options.percentageValueFontSize
+    : (parseInt(options.percentageValueFontSize, 10) / 100) * BASE_FONT_SIZE + 'px';
 
   // Get values for calculating percentage
   const percentageValueSerie = data.series.find((serie) =>
@@ -66,14 +117,7 @@ export const PercentPanel: React.FC<Props> = ({ options, data, width, height }) 
   const percentageValueSum = percentageValueField.values.toArray().reduce((sum, current) => sum + current, 0);
   const baseValueSum = baseValueField.values.toArray().reduce((sum, current) => sum + current, 0);
 
-  const percent = options.interpretAsTrend
-    ? ((percentageValueSum - baseValueSum) * 100) / baseValueSum
-    : (percentageValueSum * 100) / baseValueSum;
-  const percentFormatted =
-    options.percentageNrDecimals !== -1 ? percent.toFixed(options.percentageNrDecimals) : percent;
-
-  const percentageValueFormat = getValueFormat(options.unit)(percentageValueSum, -1, undefined, undefined);
-  const percentageValueFormatted = formattedValueToString(percentageValueFormat);
+  const display = prepareTrendDisplay(options, baseValueSum, percentageValueSum);
 
   return (
     <div
@@ -87,29 +131,12 @@ export const PercentPanel: React.FC<Props> = ({ options, data, width, height }) 
     >
       <div className={styles.textBox}>
         <SpanValue className="percenttrend-panel-base" fontSize={percentageValueFontSize} lineHeight="1em">
-          {percentageValueFormatted}
+          {display.percentageValueFormatted}
         </SpanValue>
-        {!options.interpretAsTrend ? (
-          <SpanValue className="percenttrend-panel-percent" fontSize={options.baseValueFontSize}>
-            {percentFormatted}%
-          </SpanValue>
-        ) : percent >= 0 ? (
-          <SpanValue
-            className="percenttrend-panel-percent"
-            fontSize={options.baseValueFontSize}
-            color={positiveTrendColor}
-          >
-            +{percentFormatted}% &#9650;
-          </SpanValue>
-        ) : (
-          <SpanValue
-            className="percenttrend-panel-percent"
-            fontSize={options.baseValueFontSize}
-            color={negativeTrendColor}
-          >
-            {percentFormatted}% &#9660;
-          </SpanValue>
-        )}
+        <SpanValue className="percenttrend-panel-percent" color={display.color} fontSize={options.baseValueFontSize}>
+          {display.prefix}
+          {display.percentFormatted}{display.suffix}
+        </SpanValue>
         <SpanValue className="percenttrend-panel-ref" fontSize={options.referenceTextFontSize}>
           {options.referenceText}
         </SpanValue>
