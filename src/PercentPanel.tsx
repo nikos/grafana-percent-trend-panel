@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { PanelProps, getValueFormat, formattedValueToString } from '@grafana/data';
+import { PanelProps, getValueFormat, formattedValueToString, ThemeVisualizationColors } from '@grafana/data';
 import { PercentPanelOptions } from 'types';
 import { css, cx } from 'emotion';
 import { useStyles, useTheme2 } from '@grafana/ui';
@@ -36,11 +36,11 @@ interface TrendDisplay {
 
 function prepareTrendDisplay(
   options: PercentPanelOptions,
+  colors: ThemeVisualizationColors,
   baseValueSum: number,
   percentageValueSum: number
 ): TrendDisplay {
-  const theme = useTheme2();
-  const stagnationTrendColor = theme.visualization.getColorByName('grey');
+  const stagnationTrendColor = colors.getColorByName('grey');
 
   const percentageValueFormat = getValueFormat(options.unit)(
     percentageValueSum,
@@ -50,14 +50,14 @@ function prepareTrendDisplay(
   );
   const percentageValueFormatted = formattedValueToString(percentageValueFormat);
 
-  if (baseValueSum == 0.0) {
+  if (baseValueSum === 0.0) {
     return {
       percent: NaN,
       prefix: '',
       suffix: '',
       percentFormatted: 'N/A',
       percentageValueFormatted,
-      color: stagnationTrendColor
+      color: stagnationTrendColor,
     };
   }
 
@@ -71,12 +71,12 @@ function prepareTrendDisplay(
   const stagnation = parseFloat(percentFormatted) === 0.0;
 
   const positiveTrendColor = (options.positiveIsGood === undefined ? true : options.positiveIsGood)
-    ? theme.visualization.getColorByName('green')
-    : theme.visualization.getColorByName('red');
+    ? colors.getColorByName('green')
+    : colors.getColorByName('red');
 
   const negativeTrendColor = (options.positiveIsGood === undefined ? true : options.positiveIsGood)
-    ? theme.visualization.getColorByName('red')
-    : theme.visualization.getColorByName('green');
+    ? colors.getColorByName('red')
+    : colors.getColorByName('green');
 
   const suffix = options.interpretAsTrend ? (stagnation ? ' \u25B6' : percent > 0 ? ' \u25B2' : ' \u25BC') : '';
   const prefix = !stagnation && baseValueSum > 0 ? '+' : '';
@@ -93,6 +93,7 @@ function prepareTrendDisplay(
 
 export const PercentPanel: React.FC<Props> = ({ options, data, width, height }) => {
   const styles = useStyles(getPanelStyles);
+  const theme = useTheme2();
 
   const percentageValueFontSize = options.percentageValueFontSize.includes('px')
     ? options.percentageValueFontSize
@@ -123,7 +124,7 @@ export const PercentPanel: React.FC<Props> = ({ options, data, width, height }) 
   const percentageValueSum = percentageValueField.values.toArray().reduce((sum, current) => sum + current, 0);
   const baseValueSum = baseValueField.values.toArray().reduce((sum, current) => sum + current, 0);
 
-  const display = prepareTrendDisplay(options, baseValueSum, percentageValueSum);
+  const display = prepareTrendDisplay(options, theme.visualization, baseValueSum, percentageValueSum);
 
   return (
     <div
