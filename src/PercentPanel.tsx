@@ -39,6 +39,9 @@ function prepareTrendDisplay(
   baseValueSum: number,
   percentageValueSum: number
 ): TrendDisplay {
+  const theme = useTheme2();
+  const stagnationTrendColor = theme.visualization.getColorByName('grey');
+
   const percentageValueFormat = getValueFormat(options.unit)(
     percentageValueSum,
     options.percentageValueDecimals,
@@ -46,8 +49,6 @@ function prepareTrendDisplay(
     undefined
   );
   const percentageValueFormatted = formattedValueToString(percentageValueFormat);
-  const suffix = options.interpretAsTrend ? (baseValueSum >= 0 ? ' \u25B2' : ' \u25BC') : '';
-  const prefix = baseValueSum > 0 ? '+' : '';
 
   if (baseValueSum == 0.0) {
     return {
@@ -56,6 +57,7 @@ function prepareTrendDisplay(
       suffix: '',
       percentFormatted: 'N/A',
       percentageValueFormatted,
+      color: stagnationTrendColor
     };
   }
 
@@ -65,7 +67,8 @@ function prepareTrendDisplay(
   const percentFormatted =
     options.percentageNrDecimals !== -1 ? percent.toFixed(options.percentageNrDecimals) : percent.toString();
 
-  const theme = useTheme2();
+  // Avoid irritation for small numbers being cut off
+  const stagnation = parseFloat(percentFormatted) === 0.0;
 
   const positiveTrendColor = (options.positiveIsGood === undefined ? true : options.positiveIsGood)
     ? theme.visualization.getColorByName('green')
@@ -75,11 +78,14 @@ function prepareTrendDisplay(
     ? theme.visualization.getColorByName('red')
     : theme.visualization.getColorByName('green');
 
+  const suffix = options.interpretAsTrend ? (stagnation ? ' \u25B6' : percent > 0 ? ' \u25B2' : ' \u25BC') : '';
+  const prefix = !stagnation && baseValueSum > 0 ? '+' : '';
+
   return {
     percent,
     prefix,
     suffix,
-    color: percent == 0 ? undefined : (percent >= 0 ? positiveTrendColor : negativeTrendColor),
+    color: stagnation ? stagnationTrendColor : percent > 0 ? positiveTrendColor : negativeTrendColor,
     percentFormatted: percentFormatted + '%',
     percentageValueFormatted,
   };
@@ -135,7 +141,8 @@ export const PercentPanel: React.FC<Props> = ({ options, data, width, height }) 
         </SpanValue>
         <SpanValue className="percenttrend-panel-percent" color={display.color} fontSize={options.baseValueFontSize}>
           {display.prefix}
-          {display.percentFormatted}{display.suffix}
+          {display.percentFormatted}
+          {display.suffix}
         </SpanValue>
         <SpanValue className="percenttrend-panel-ref" fontSize={options.referenceTextFontSize}>
           {options.referenceText}

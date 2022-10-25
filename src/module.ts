@@ -23,8 +23,8 @@ export const plugin = new PanelPlugin<PercentPanelOptions>(PercentPanel).setPane
     .addNumberInput({
       path: 'percentageValueDecimals',
       name: 'Nr. of decimals for percentage value',
-      description: 'For the percentage value number (-1: auto)',
-      defaultValue: -1,
+      description: 'For the percentage value number',
+      defaultValue: undefined,
     })
     .addBooleanSwitch({
       path: 'interpretAsTrend',

@@ -26,3 +26,10 @@ Added logo.
 ## 1.0.5 (2022-10-19)
 
 * Allow to invert colorization of trend (thanks [@jammiemil](https://github.com/nikos/grafana-percent-trend-panel/issues/10))
+
+## 1.0.6 (2022-10-25)
+
+* Support locale unit for percentage value (thanks [@itsnull12](https://github.com/nikos/grafana-percent-trend-panel/issues/15))
+* Allow to specify number of decimals displayed for percentage value 
+* Improved display in case no previous ("base") value available instead of infinity
+* Improved display of stagnation (= 0% difference to base value)
