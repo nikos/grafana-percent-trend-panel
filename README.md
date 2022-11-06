@@ -26,32 +26,6 @@ Download the [latest release](https://github.com/nikos/grafana-percent-trend-pan
 
    ![Configure details in panel options](https://raw.githubusercontent.com/nikos/grafana-percent-trend-panel/main/src/img/screenshots/panel-options.png)
 
-## Develop and contribute
-
-1. Install dependencies
-
-   ```bash
-   yarn install
-   ```
-
-2. Build plugin in development mode or run in watch mode
-
-   ```bash
-   yarn dev
-   ```
-
-   or
-
-   ```bash
-   yarn watch
-   ```
-
-3. Build plugin in production mode
-
-   ```bash
-   yarn build
-   ```
-
 ## More resources
 
 - [Grafana documentation](https://grafana.com/docs/)
