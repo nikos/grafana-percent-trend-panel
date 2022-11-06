@@ -2,16 +2,16 @@
 
 ## 1.0.0 (2022-09-29)
 
-Initial release.
+* Initial release
 
 ## 1.0.1 (2022-09-30)
 
-Added logo.
+* Added logo
 
 ## 1.0.2 (2022-10-04)
 
-* Avoid usage of deprecated UI theme and style setup.
-* Fixed bug when using pixel to specify percentage value size.
+* Avoid usage of deprecated UI theme and style setup
+* Fixed bug when using pixel to specify percentage value size
 
 ## 1.0.3 (2022-10-05)
 
@@ -33,3 +33,7 @@ Added logo.
 * Allow to specify number of decimals displayed for percentage value 
 * Improved display in case no previous ("base") value available instead of infinity
 * Improved display of stagnation (= 0% difference to base value)
+
+## 1.0.7 (2022-11-06)
+
+* Fixed prefix in case of negative percentage trend

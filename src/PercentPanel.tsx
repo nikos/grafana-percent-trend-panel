@@ -79,7 +79,7 @@ function prepareTrendDisplay(
     : colors.getColorByName('green');
 
   const suffix = options.interpretAsTrend ? (stagnation ? ' \u25B6' : percent > 0 ? ' \u25B2' : ' \u25BC') : '';
-  const prefix = !stagnation && baseValueSum > 0 ? '+' : '';
+  const prefix = !stagnation && percent > 0 ? '+' : '';
 
   return {
     percent,
