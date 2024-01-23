@@ -1,6 +1,6 @@
 {
   "name": "grafana-percent-trend-panel",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Grafana percent trend panel",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
