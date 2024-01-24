@@ -107,22 +107,22 @@ export const PercentPanel: React.FC<Props> = ({ options, data, width, height }) 
     serie.fields.find((field) => field.name === options.baseValueField)
   );
 
-  if (!percentageValueSerie || !baseValueSerie) {
+  if (!percentageValueSerie) {
     return <p>Selected series are not available</p>;
   }
 
   const percentageValueField = percentageValueSerie.fields.find((field) => field.name === options.percentageValueField);
-  const baseValueField = baseValueSerie.fields.find((field) => field.name === options.baseValueField);
+  const baseValueField = baseValueSerie?.fields.find((field) => field.name === options.baseValueField);
 
-  if (!percentageValueField || !baseValueField) {
+  if (!percentageValueField) {
     return <p>Selected fields are not available</p>;
   }
-  if (percentageValueField.values.length === 0 || baseValueField.values.length === 0) {
+  if (percentageValueField.values.length === 0) {
     return <p>Selected fields are empty</p>;
   }
 
   const percentageValueSum = percentageValueField.values.toArray().reduce((sum, current) => sum + current, 0);
-  const baseValueSum = baseValueField.values.toArray().reduce((sum, current) => sum + current, 0);
+  const baseValueSum = baseValueField ? baseValueField.values.toArray().reduce((sum, current) => sum + current, 0) : 0;
 
   const display = prepareTrendDisplay(options, theme.visualization, baseValueSum, percentageValueSum);
 
