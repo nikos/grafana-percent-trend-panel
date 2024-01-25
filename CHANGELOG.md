@@ -1,9 +1,5 @@
 # Changelog
 
-## 1.0.8 (2024-01-23)
-
-* Show percentage value if base value (ie. from previous time range) is not available.
-
 ## 1.0.7 (2022-11-06)
 
 * Fixed prefix in case of negative percentage trend
