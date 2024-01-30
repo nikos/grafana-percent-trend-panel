@@ -120,10 +120,10 @@ jobs:
         # IMPORTANT: For the very first release there is no MANIFEST.txt possible to generate from signing task, therefore linting will fail
         run: |
           git clone https://github.com/grafana/plugin-validator
-          pushd ./plugin-validator/pkg/cmd/plugincheck
+          pushd ./plugin-validator/pkg/cmd/plugincheck2
           go install
           popd
-          plugincheck ${{ steps.metadata.outputs.archive }}
+          plugincheck2 ${{ steps.metadata.outputs.archive }}
 
       - name: Create release
         id: create_release
