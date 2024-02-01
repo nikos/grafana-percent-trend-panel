@@ -25,11 +25,11 @@ jobs:
           go-version: "1.21"
 
       - name: Install dependencies
-        run: ${{ github.action_path }}/pm.sh install
+        run: yarn install
         shell: bash
 
       - name: Build and test frontend
-        run: ${{ github.action_path }}/pm.sh build
+        run: yarn build
         shell: bash
 
       - name: Check for backend
@@ -55,20 +55,19 @@ jobs:
           version: latest
           args: buildAll
 
-      - name: Warn missing Grafana access policy token
-        run: |
-          echo Please generate a Grafana access policy token: https://grafana.com/developers/plugin-tools/publish-a-plugin/sign-a-plugin#generate-an-access-policy-token
-          echo Once done please follow the instructions found here: https://github.com/${{github.repository}}/blob/main/README.md#using-github-actions-release-workflow
-        if: ${{ inputs.policy_token == '' }}
-        shell: bash
+      #- name: Warn missing Grafana access policy token
+      #  run: |
+      #    echo Please generate a Grafana access policy token: https://grafana.com/developers/plugin-tools/publish-a-plugin/sign-a-plugin#generate-an-access-policy-token
+      #    echo Once done please follow the instructions found here: https://github.com/${{github.repository}}/blob/main/README.md#using-github-actions-release-workflow
+      #  if: ${{ inputs.policy_token == '' }}
+      #  shell: bash
 
       - name: Sign plugin
-        run: ${{ github.action_path }}/pm.sh sign
+        run: yarn sign
         shell: bash
         env:
-          GRAFANA_ACCESS_POLICY_TOKEN: ${{ inputs.policy_token }}
-          GRAFANA_API_KEY: ${{ inputs.grafana_token }}
-        if: ${{ inputs.policy_token != '' }}
+          GRAFANA_ACCESS_POLICY_TOKEN: ${{ secrets.GRAFANA_ACCESS_POLICY_TOKEN }}
+          GRAFANA_API_KEY: ${{ secrets.GRAFANA_API_KEY }}
 
       - name: Get plugin metadata
         id: metadata
@@ -123,7 +122,7 @@ jobs:
         with:
           draft: true
           generate_release_notes: true
-          token: ${{ inputs.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           files: |
             ./${{ steps.metadata.outputs.archive }}
             ./${{ steps.metadata.outputs.archive-sha1sum }}
