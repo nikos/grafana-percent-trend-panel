@@ -13,6 +13,9 @@ to see the trend evolution easily.
 
 The idea for this plugin panel was inspired by an article about [Embedded Analytics](https://www.revealbi.io/glossary/embedded-analytics).
 
+This plugin is reviewed by Grafana engineers and released on GrafanaLabs, 
+see Plugins -> Panel (Community): [Percentage Trend](https://grafana.com/grafana/plugins/nikosc-percenttrend-panel/)
+
 ## Install
 
 Download the [latest release](https://github.com/nikos/grafana-percent-trend-panel/releases) (named 
